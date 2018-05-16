@@ -331,6 +331,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Body.cs" />
     <Compile Include="Assets\Scripts\CentipedeController.cs" />
     <Compile Include="Assets\Scripts\CentipedeControllerNew.cs" />
     <Compile Include="Assets\Scripts\Mushroom.cs" />

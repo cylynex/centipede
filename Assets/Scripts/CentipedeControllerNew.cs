@@ -18,7 +18,14 @@ public class CentipedeControllerNew : MonoBehaviour {
     bool movingDown = false;
     bool avoidingShroom = false;
 
+    [Header("For Body")]
+    public Vector3 lastPosition;
+    public Quaternion lastRotation;
+
     void Start() {
+        // Establish position and rotation for pieces to follow
+        // TODO rotation
+        lastPosition = transform.position;
     }
 
 
@@ -43,6 +50,7 @@ public class CentipedeControllerNew : MonoBehaviour {
         // Wall
         if (coll.gameObject.name == "Wall") {
             Debug.Log("hit wall - turn around");
+            UpdateBodyRotation();
             transform.rotation = Quaternion.Euler(0, 0, 90);
 
             // Set the target destination
@@ -69,7 +77,7 @@ public class CentipedeControllerNew : MonoBehaviour {
                 avoidingShroom = false;
 
             } else {
-
+                UpdateBodyRotation();
                 transform.rotation = Quaternion.Euler(0, 0, 90);
 
                 // Set the target destination
@@ -89,6 +97,7 @@ public class CentipedeControllerNew : MonoBehaviour {
             z = 180;
         }
 
+        UpdateBodyRotation();
         transform.rotation = Quaternion.Euler(0, 0, z);
 
     }
@@ -103,6 +112,7 @@ public class CentipedeControllerNew : MonoBehaviour {
                 z = 0;
             }
 
+            UpdateBodyRotation();
             transform.rotation = Quaternion.Euler(0, 0, z);
 
             movingDown = false;
@@ -113,8 +123,17 @@ public class CentipedeControllerNew : MonoBehaviour {
 
     // Movement
     void Move() {
-        
+        UpdateBodyPosition();
         transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
+
+    // Update variables for next body part
+    void UpdateBodyRotation() {
+        lastRotation = transform.rotation;
+    }
+
+    void UpdateBodyPosition() {
+        lastPosition = transform.position;
+    }
 }

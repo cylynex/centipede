@@ -12,6 +12,10 @@ public class CentipedeController : MonoBehaviour {
     private int z;
     public int thisHeadTag;
 
+    [Header("For Body")]
+    public Vector3 lastPosition;
+    public Quaternion lastRotation;
+
     void Start() {
     }
 
@@ -31,6 +35,7 @@ public class CentipedeController : MonoBehaviour {
         // Wall
         if (coll.gameObject.name == "Wall") {
             Debug.Log("hit wall - turn around");
+            lastRotation = transform.rotation;
             transform.rotation = Quaternion.Euler(0, 0, 90);
             StartCoroutine("TurnAround");
         }
@@ -38,6 +43,7 @@ public class CentipedeController : MonoBehaviour {
         // Mushroom
         else if (coll.gameObject.tag == "Obstacle") {
             Debug.Log("hit obstacle");
+            lastRotation = transform.rotation;
             transform.rotation = Quaternion.Euler(0, 0, 90);
             StartCoroutine("TurnBack");
         }
@@ -51,7 +57,7 @@ public class CentipedeController : MonoBehaviour {
         } else {
             z = 180;
         }
-
+        lastRotation = transform.rotation;
         transform.rotation = Quaternion.Euler(0, 0, z);
     }
 
@@ -64,17 +70,19 @@ public class CentipedeController : MonoBehaviour {
             currentDirection = 1;
             z = 0;
         }
-
+        lastRotation = transform.rotation;
         transform.rotation = Quaternion.Euler(0, 0, z);
     }
 
 
     // Movement
     void MoveLeft() {
+        lastPosition = transform.position;
         transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
     void MoveRight() {
+        lastPosition = transform.position;
         transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
