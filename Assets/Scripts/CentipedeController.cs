@@ -24,18 +24,41 @@ public class CentipedeController : MonoBehaviour {
 
 
     void OnCollisionEnter2D(Collision2D coll) {
-        Debug.Log("hit something: "+coll.gameObject.name);
-        transform.rotation = Quaternion.Euler(0, 0, 90);
-        StartCoroutine("TurnBack");
+
+        // Wall
+        if (coll.gameObject.name == "Wall") {
+            Debug.Log("hit wall - turn around");
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            StartCoroutine("TurnAround");
+        }
+
+        // Mushroom
+        else if (coll.gameObject.name == "Mushroom") {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            StartCoroutine("TurnBack");
+        }
     }
 
 
     IEnumerator TurnBack() {
-        yield return new WaitForSeconds(0.07f);
+        yield return new WaitForSeconds(0.1f);
         if (currentDirection == 1) {
             z = 0;
         } else {
             z = 180;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, z);
+    }
+
+    IEnumerator TurnAround() {
+        yield return new WaitForSeconds(0.1f);
+        if (currentDirection == 1) {
+            currentDirection = 2;
+            z = 180;
+        } else {
+            currentDirection = 1;
+            z = 0;
         }
 
         transform.rotation = Quaternion.Euler(0, 0, z);
@@ -48,7 +71,7 @@ public class CentipedeController : MonoBehaviour {
     }
 
     void MoveRight() {
-        transform.Translate(Vector3.right * Time.deltaTime);
+        transform.Translate(Vector3.left * Time.deltaTime);
     }
 
 }

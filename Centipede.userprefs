@@ -1,7 +1,9 @@
 ﻿<Properties StartupConfiguration="{860A556A-600C-55DC-325C-32D71E43CC2B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CentipedeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SpawnMushrooms.cs">
     <Files>
-      <File FileName="Assets/Scripts/CentipedeController.cs" Line="8" Column="19" />
+      <File FileName="Assets/Scripts/CentipedeController.cs" Line="9" Column="19" />
+      <File FileName="Assets/Scripts/Walls.cs" Line="8" Column="31" />
+      <File FileName="Assets/Scripts/SpawnMushrooms.cs" Line="7" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -10,4 +12,5 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Centipede PreferredExecutionTarget="Unity.Editor" />
 </Properties>
