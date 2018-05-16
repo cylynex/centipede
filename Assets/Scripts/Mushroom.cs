@@ -23,7 +23,8 @@ public class Mushroom : MonoBehaviour {
             if (hitPoints <= 0) {
                 GetComponentInChildren<ParticleSystem>().Play();
                 GetComponent<Renderer>().enabled = false;
-                Destroy(gameObject, 1f);
+                GetComponent<Collider2D>().enabled = false;
+                Destroy(gameObject, 1.5f);
             }
         }
     }
