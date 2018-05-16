@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     Vector3 mousePos;
     int offset = 8;
-    float maxFireCountdown = 1f;
+    float maxFireCountdown = 0.5f;
     float fireCountdown;
     public GameObject firePoint;
     public GameObject laser;

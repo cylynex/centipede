@@ -7,6 +7,7 @@ public class Mushroom : MonoBehaviour {
     int hitPoints = 3;
     public Sprite damage1;
     public Sprite damage2;
+    public ParticleSystem explode;
 
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "LaserBeam") {
@@ -20,7 +21,9 @@ public class Mushroom : MonoBehaviour {
             }
 
             if (hitPoints <= 0) {
-                Destroy(gameObject);
+                GetComponentInChildren<ParticleSystem>().Play();
+                GetComponent<Renderer>().enabled = false;
+                Destroy(gameObject, 1f);
             }
         }
     }

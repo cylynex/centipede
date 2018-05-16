@@ -5,8 +5,8 @@
       <File FileName="Assets/Scripts/Walls.cs" Line="8" Column="31" />
       <File FileName="Assets/Scripts/SpawnMushrooms.cs" Line="25" Column="56" />
       <File FileName="Assets/Scripts/CentipedeControllerNew.cs" Line="32" Column="36" />
-      <File FileName="Assets/Scripts/Player.cs" Line="13" Column="22" />
-      <File FileName="Assets/Scripts/Mushroom.cs" Line="9" Column="5" />
+      <File FileName="Assets/Scripts/Player.cs" Line="9" Column="33" />
+      <File FileName="Assets/Scripts/Mushroom.cs" Line="24" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
