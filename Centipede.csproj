@@ -332,6 +332,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CentipedeController.cs" />
+    <Compile Include="Assets\Scripts\Walls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="\Volumes\Glacier\unity-projects\centipede\Centipede\Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
