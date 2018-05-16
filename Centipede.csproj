@@ -332,6 +332,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CentipedeController.cs" />
+    <Compile Include="Assets\Scripts\CentipedeControllerNew.cs" />
     <Compile Include="Assets\Scripts\SpawnMushrooms.cs" />
     <Compile Include="Assets\Scripts\Walls.cs" />
   </ItemGroup>

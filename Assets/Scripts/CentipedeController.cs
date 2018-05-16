@@ -5,11 +5,14 @@ using UnityEngine;
 public class CentipedeController : MonoBehaviour {
 
     // head movement direction
+    [Header("Configurable")]
+    public float speed = 0.5f;
+
     int currentDirection = 1;
     private int z;
-	
+    public int thisHeadTag;
+
     void Start() {
-        
     }
 
 
@@ -33,7 +36,8 @@ public class CentipedeController : MonoBehaviour {
         }
 
         // Mushroom
-        else if (coll.gameObject.name == "Mushroom") {
+        else if (coll.gameObject.tag == "Obstacle") {
+            Debug.Log("hit obstacle");
             transform.rotation = Quaternion.Euler(0, 0, 90);
             StartCoroutine("TurnBack");
         }
@@ -67,11 +71,11 @@ public class CentipedeController : MonoBehaviour {
 
     // Movement
     void MoveLeft() {
-        transform.Translate(Vector3.left * Time.deltaTime);
+        transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
     void MoveRight() {
-        transform.Translate(Vector3.left * Time.deltaTime);
+        transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
 }
