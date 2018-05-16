@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - LaserBeam
+  - Centipede
   layers:
   - Default
   - TransparentFX
@@ -16,13 +18,13 @@ TagManager:
   - 
   - 
   - 
+  - Player
   - 
+  - Laser
   - 
+  - Centipede
   - 
-  - 
-  - 
-  - 
-  - 
+  - Mushroom
   - 
   - 
   - 

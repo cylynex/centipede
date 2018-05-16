@@ -6,6 +6,8 @@ TextureImporter:
     21300002: centipedeParts_1
     21300004: centipedeParts_2
     21300006: centipedeParts_3
+    21300008: centipedeParts_4
+    21300010: centipedeParts_5
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -138,13 +140,13 @@ TextureImporter:
         width: 17
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7187c0f90d44d45afbfc1ee783962070
+      spriteID: 90292ff81d6584ed18340551bf86020d
       vertices: []
       indices: 
       edges: []
@@ -158,13 +160,13 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 062166d01afaa40e386ebf884ad2c98c
+      spriteID: 57cda6f208cd24cd6a95a7a4da1143b1
       vertices: []
       indices: 
       edges: []
@@ -178,13 +180,13 @@ TextureImporter:
         width: 16
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 512a5e3c86aa44aa99355f73b0845d8f
+      spriteID: de075f4172f034816bf4b0d72b4f96e6
       vertices: []
       indices: 
       edges: []
@@ -198,13 +200,53 @@ TextureImporter:
         width: 16
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b5b7802ed7fe4980b9f8aa8c99e51be
+      spriteID: 3bbd85e7f39974894ac5e7e351898f0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: centipedeParts_4
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 133
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40f7db7fb6e17451fba9f8e97de682d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: centipedeParts_5
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 133
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc819edff94124ff694652f2aec8a617
       vertices: []
       indices: 
       edges: []
@@ -212,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c48c7a08d5128481e9e9da0ecfbb3e9c
+    spriteID: 8bb0098f6a2fb49598c7ebffa4927109
     vertices: []
     indices: 
     edges: []

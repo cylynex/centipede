@@ -6,11 +6,14 @@ public class Player : MonoBehaviour {
 
     Vector3 mousePos;
     int offset = 8;
-    float maxFireCountdown = 3f;
-    public float fireCountdown;
+    float maxFireCountdown = 1f;
+    float fireCountdown;
+    public GameObject firePoint;
+    public GameObject laser;
+    float thrust = 150;
 
     void Start() {
-        fireCountdown = maxFireCountdown;
+        fireCountdown = 0;
     }
 
     void Update() {
@@ -35,7 +38,8 @@ public class Player : MonoBehaviour {
 
         if (fireCountdown <= 0) {
             if (Input.GetMouseButtonDown(0)) {
-                Debug.Log("fire");
+                GameObject theLaser = (GameObject)Instantiate(laser, firePoint.transform.position, Quaternion.identity);
+                theLaser.GetComponent<Rigidbody2D>().AddForce(transform.up * thrust);
                 fireCountdown = maxFireCountdown;
             }
         }
