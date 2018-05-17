@@ -17,8 +17,12 @@ public class CentipedeControllerNew : MonoBehaviour {
 
     bool movingDown = false;
     bool avoidingShroom = false;
+    bool movingDownTurn = false;
 
     [Header("For Body")]
+    public List<Vector3> rotateAtPosition;
+    public List<Quaternion> rotateTo;
+
     public Vector3 lastPosition;
     public Quaternion lastRotation;
 
@@ -34,12 +38,13 @@ public class CentipedeControllerNew : MonoBehaviour {
             TurnAround();
         }
 
-        if (transform.position.y <= downSpot.y) {
-            TurnBack();
-            avoidingShroom = false;
+        if (movingDownTurn == true) {
+            if (transform.position.y <= downSpot.y) {
+                TurnBack();
+                movingDownTurn = false;
+                avoidingShroom = false;
+            }
         }
-
-
 
         Move();
     }
@@ -50,8 +55,8 @@ public class CentipedeControllerNew : MonoBehaviour {
         // Wall
         if (coll.gameObject.name == "Wall") {
             Debug.Log("hit wall - turn around");
-            UpdateBodyRotation();
             transform.rotation = Quaternion.Euler(0, 0, 90);
+            UpdateBodyRotation();
 
             // Set the target destination
             downSpot = transform.position;
@@ -76,11 +81,18 @@ public class CentipedeControllerNew : MonoBehaviour {
                 TurnBack();
                 avoidingShroom = false;
 
+            } else if (coll.gameObject.tag == "Centipede") {
+                // Hit centipede
+                Destroy(coll.gameObject);
+                Destroy(gameObject);
+
             } else {
+                Debug.Log("else collision");
+                transform.rotation = Quaternion.Euler(0, 0, 90); 
                 UpdateBodyRotation();
-                transform.rotation = Quaternion.Euler(0, 0, 90);
 
                 // Set the target destination
+                movingDownTurn = true;
                 downSpot = transform.position;
                 downSpot.y -= 0.4f;
 
@@ -97,8 +109,9 @@ public class CentipedeControllerNew : MonoBehaviour {
             z = 180;
         }
 
-        UpdateBodyRotation();
+        Debug.Log("turnback");
         transform.rotation = Quaternion.Euler(0, 0, z);
+        UpdateBodyRotation();
 
     }
 
@@ -112,8 +125,9 @@ public class CentipedeControllerNew : MonoBehaviour {
                 z = 0;
             }
 
-            UpdateBodyRotation();
+            Debug.Log("turnaround");
             transform.rotation = Quaternion.Euler(0, 0, z);
+            UpdateBodyRotation();
 
             movingDown = false;
         }
@@ -123,17 +137,21 @@ public class CentipedeControllerNew : MonoBehaviour {
 
     // Movement
     void Move() {
-        UpdateBodyPosition();
         transform.Translate(Vector3.left * Time.deltaTime * speed);
     }
 
 
     // Update variables for next body part
     void UpdateBodyRotation() {
-        lastRotation = transform.rotation;
+        rotateAtPosition.Add(transform.position);
+        rotateTo.Add(transform.rotation);
     }
 
-    void UpdateBodyPosition() {
-        lastPosition = transform.position;
+
+    // Check next
+    public bool CheckNextMove(int spotToCheck) {
+        int correctedSpotCheck = spotToCheck + 1;
+        if (rotateAtPosition.Count < correctedSpotCheck) return false;
+        return true;
     }
 }
