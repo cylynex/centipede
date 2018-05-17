@@ -419,7 +419,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 387971231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.19, y: 4.28, z: -0.060546875}
+  m_LocalPosition: {x: 3.68, y: 4.14, z: -0.060546875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &600613965
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -572,7 +572,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 600613964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.02, y: 9.46, z: 0}
+  m_LocalPosition: {x: -4.8010006, y: 1.51, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1320093067
 Transform:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1320093066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.711, y: 9.46, z: 0}
+  m_LocalPosition: {x: -5.11, y: 1.51, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 253994661}
@@ -1465,3 +1465,4 @@ MonoBehaviour:
   centipedePrefab: {fileID: 1102396972100982, guid: 167bbd7a83d8e4fe08d9ec2b4af32ca6,
     type: 2}
   podPrefab: {fileID: 1656213545247762, guid: 5c0aab37bdbd34e94992cd5cde454678, type: 2}
+  centiPods: []

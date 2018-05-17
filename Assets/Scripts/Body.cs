@@ -16,16 +16,6 @@ public class Body : MonoBehaviour {
     public List<Vector3> rotateAtPosition;
     public List<Quaternion> rotateTo;
 
-    void Start() {
-        if (pieceToFollow.GetComponent<CentipedeControllerNew>()) {
-            Debug.Log("Following the head");
-            firstPiece = true;
-            speed = pieceToFollow.GetComponent<CentipedeControllerNew>().speed;
-        } else {
-            Debug.Log("following another body");
-        }
-    }
-
     void Update() {
 
         GetNextManeuver();

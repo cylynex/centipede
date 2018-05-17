@@ -13,6 +13,7 @@ public class Centipede : MonoBehaviour {
     public Sprite[] sprites;
 
     // Move Stuff
+    int readMoveIndex = 0;
     int moveIndex = 0;
     int currentDirection = 1;
     private int z;
@@ -27,6 +28,8 @@ public class Centipede : MonoBehaviour {
     [Header("For Body")]
     public List<Vector3> rotateAtPosition;
     public List<Quaternion> rotateTo;
+    public Vector3 nextTurn;
+    public Quaternion nextRotation;
 
 
     void Start() {
@@ -35,19 +38,23 @@ public class Centipede : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = sprites[0];
         } else {
             GetComponent<SpriteRenderer>().sprite = sprites[1];
+            GetComponent<BoxCollider2D>().isTrigger = true;
         }
     }
 
 
     void Update() {
         if (isHead) {
-            //MoveHead();
+            MoveHead();
+        } else {
+            MoveBody();
         }
     }
 
 
+    // Head Functions and Movement 
     void MoveHead() {
-        /*if (movingDown == true) {
+        if (movingDown == true) {
             TurnAround();
         }
 
@@ -59,7 +66,181 @@ public class Centipede : MonoBehaviour {
             }
         }
 
-        Move();*/
+        MoveFront();
+    }
+
+    /* Head Movement Specific Stuff */
+    void MoveFront() {
+        transform.Translate(Vector3.left * Time.deltaTime * speed);
+    }
+
+
+    void TurnBack() {
+        if (currentDirection == 1) {
+            z = 0;
+        } else {
+            z = 180;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, z);
+        UpdateBodyRotation();
+
+    }
+
+    void TurnAround() {
+        if (transform.position.y <= downSpot.y) {
+            if (currentDirection == 1) {
+                currentDirection = 2;
+                z = 180;
+            } else {
+                currentDirection = 1;
+                z = 0;
+            }
+
+            transform.rotation = Quaternion.Euler(0, 0, z);
+            UpdateBodyRotation();
+
+            movingDown = false;
+        }
+    }
+
+
+    // Update variables for next body part
+    void UpdateBodyRotation() {
+        rotateAtPosition.Add(transform.position);
+        rotateTo.Add(transform.rotation);
+    }
+
+
+    // Check next
+    public bool CheckNextMove(int spotToCheck) {
+        int correctedSpotCheck = spotToCheck + 1;
+        if (rotateAtPosition.Count < correctedSpotCheck) return false;
+        return true;
+    }
+
+
+    // Collisions for head control
+    void OnCollisionEnter2D(Collision2D coll) {
+        if (isHead) {
+            // Wall
+            if (coll.gameObject.name == "Wall") {
+                transform.rotation = Quaternion.Euler(0, 0, 90);
+                UpdateBodyRotation();
+
+                // Set the target destination
+                downSpot = transform.position;
+                downSpot.y -= 0.4f;
+                movingDown = true;
+                TurnAround();
+            }
+
+            // Hit an Obstacle (non-wall)
+            else if (coll.gameObject.tag == "Obstacle") {
+
+                if (avoidingShroom) {
+                    // Reverse the polarity (downward collision while already avoiding an obstacle
+                    if (currentDirection == 1) {
+                        currentDirection = 2;
+                    } else {
+                        currentDirection = 1;
+                    }
+
+                    TurnBack();
+                    avoidingShroom = false;
+
+                } else if (coll.gameObject.tag == "Centipede") {
+                    // Hit centipede
+                    Destroy(coll.gameObject);
+                    Destroy(gameObject);
+
+                } else {
+                    // Else collision
+                    transform.rotation = Quaternion.Euler(0, 0, 90);
+                    UpdateBodyRotation();
+
+                    // Set the target destination
+                    movingDownTurn = true;
+                    downSpot = transform.position;
+                    downSpot.y -= 0.4f;
+
+                    avoidingShroom = true;
+                }
+            }
+        }
+    }
+
+
+
+
+    /* Body Movement Specific Stuff */
+
+
+    // Body Movement
+    void MoveBody() {
+
+        // Check if it lost its way (bad head)
+        if (pieceToFollow == null) { 
+            Debug.Log("lost head"); 
+            isHead = true;
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            GetComponent<SpriteRenderer>().sprite = sprites[0];
+
+            //  crazy ivan
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            UpdateBodyRotation();
+
+            // Set the target destination
+            movingDownTurn = true;
+            downSpot = transform.position;
+            downSpot.y -= 0.4f;
+
+            avoidingShroom = true;
+
+            if (currentDirection == 1) { currentDirection = 2; } else { currentDirection = 1; }
+        }
+
+        GetNextManeuver();
+        if (transform.position == nextTurn) {
+            transform.rotation = nextRotation;
+
+            // Update internal list
+            rotateAtPosition.Add(pieceToFollow.GetComponent<Centipede>().rotateAtPosition[moveIndex]);
+            rotateTo.Add(pieceToFollow.GetComponent<Centipede>().rotateTo[moveIndex]);
+
+            moveIndex++;
+        }
+
+        MoveAss();
+    }
+
+
+    // Movement for body only
+    void MoveAss() {
+        //transform.Translate(Vector3.left * Time.deltaTime * speed);
+        Debug.Log("have a target, get moving towards " + nextTurn);
+        transform.position = Vector3.MoveTowards(transform.position, nextTurn, Time.deltaTime);
+        if (transform.position == nextTurn) {
+            Debug.Log("here");
+        }
+    }
+
+
+    void GetNextManeuver() {
+        if (pieceToFollow.GetComponent<Centipede>().CheckNextMove(moveIndex)) {
+            Debug.Log("has a next move");
+            nextTurn = pieceToFollow.GetComponent<Centipede>().rotateAtPosition[moveIndex];
+            nextRotation = pieceToFollow.GetComponent<Centipede>().rotateTo[moveIndex];
+        } else {
+            Debug.Log("no next move available - do something else");
+            // Go to the heads direction instead
+            nextTurn = pieceToFollow.GetComponent<Centipede>().transform.position;
+            foreach (Transform child in pieceToFollow.transform) {
+                if (child.tag == "followSpot") {
+                    transform.position = child.position;
+                }
+            }
+        }
     }
 
 }

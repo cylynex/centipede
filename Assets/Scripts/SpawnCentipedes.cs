@@ -23,6 +23,7 @@ public class SpawnCentipedes : MonoBehaviour {
         bool secondPod = false;
         int podSpot = -1;
 
+
         spawnPodAt = spawnPoint.transform;
         for (int i = 0; i < numberOfPods; i++) {
 
