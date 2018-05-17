@@ -7,7 +7,6 @@ public class Body : MonoBehaviour {
     public GameObject pieceToFollow;
     float speed;
     int moveIndex = 0;
-    float step;
     bool firstPiece = false;
 
     public Vector3 nextTurn;
@@ -18,7 +17,6 @@ public class Body : MonoBehaviour {
     public List<Quaternion> rotateTo;
 
     void Start() {
-        step = speed * Time.deltaTime;
         if (pieceToFollow.GetComponent<CentipedeControllerNew>()) {
             Debug.Log("Following the head");
             firstPiece = true;

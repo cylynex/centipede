@@ -23,15 +23,6 @@ public class CentipedeControllerNew : MonoBehaviour {
     public List<Vector3> rotateAtPosition;
     public List<Quaternion> rotateTo;
 
-    public Vector3 lastPosition;
-    public Quaternion lastRotation;
-
-    void Start() {
-        // Establish position and rotation for pieces to follow
-        // TODO rotation
-        lastPosition = transform.position;
-    }
-
 
     void Update() {
         if (movingDown == true) {
@@ -54,7 +45,6 @@ public class CentipedeControllerNew : MonoBehaviour {
 
         // Wall
         if (coll.gameObject.name == "Wall") {
-            Debug.Log("hit wall - turn around");
             transform.rotation = Quaternion.Euler(0, 0, 90);
             UpdateBodyRotation();
 
@@ -65,13 +55,11 @@ public class CentipedeControllerNew : MonoBehaviour {
             TurnAround();
         }
 
-        // Mushroom
+        // Hit an Obstacle (non-wall)
         else if (coll.gameObject.tag == "Obstacle") {
-            Debug.Log("hit obstacle");
 
             if (avoidingShroom) {
-                Debug.Log("downward collision while avoiding shroom");
-                // Reverse the polarity
+                // Reverse the polarity (downward collision while already avoiding an obstacle
                 if (currentDirection == 1) {
                     currentDirection = 2;
                 } else {
@@ -87,7 +75,7 @@ public class CentipedeControllerNew : MonoBehaviour {
                 Destroy(gameObject);
 
             } else {
-                Debug.Log("else collision");
+                // Else collision
                 transform.rotation = Quaternion.Euler(0, 0, 90); 
                 UpdateBodyRotation();
 
@@ -109,7 +97,6 @@ public class CentipedeControllerNew : MonoBehaviour {
             z = 180;
         }
 
-        Debug.Log("turnback");
         transform.rotation = Quaternion.Euler(0, 0, z);
         UpdateBodyRotation();
 
@@ -125,7 +112,6 @@ public class CentipedeControllerNew : MonoBehaviour {
                 z = 0;
             }
 
-            Debug.Log("turnaround");
             transform.rotation = Quaternion.Euler(0, 0, z);
             UpdateBodyRotation();
 
