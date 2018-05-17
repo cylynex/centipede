@@ -23,7 +23,7 @@ public class SpawnMushrooms : MonoBehaviour {
             xSpawn = Random.Range(minX, maxX);
             ySpawn = Random.Range(minY, maxY);
             spawnSpot = new Vector3(xSpawn, ySpawn, 0);
-            //Instantiate(mushroomPrefab, spawnSpot, Quaternion.identity);
+            Instantiate(mushroomPrefab, spawnSpot, Quaternion.identity);
         }
 	}
 	

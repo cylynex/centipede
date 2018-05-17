@@ -9,6 +9,7 @@ public class Centipede : MonoBehaviour {
     public bool isHead = false;
     public float speed = 1;
     public bool firstBodyPart = false;
+    public GameObject obstaclePrefab;
 
     public Sprite[] sprites;
 
@@ -54,11 +55,14 @@ public class Centipede : MonoBehaviour {
 
     // Head Functions and Movement 
     void MoveHead() {
+
         if (movingDown == true) {
+            Debug.Log("movingdown");
             TurnAround();
         }
 
         if (movingDownTurn == true) {
+            Debug.Log("movingdownturn");
             if (transform.position.y <= downSpot.y) {
                 TurnBack();
                 movingDownTurn = false;
@@ -66,7 +70,9 @@ public class Centipede : MonoBehaviour {
             }
         }
 
+
         MoveFront();
+
     }
 
     /* Head Movement Specific Stuff */
@@ -187,6 +193,15 @@ public class Centipede : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = sprites[0];
 
             //  crazy ivan
+            if (currentDirection == 1) {
+                currentDirection = 2;
+            } else {
+                currentDirection = 1;
+            }
+
+            TurnBack();
+
+            /*
             transform.rotation = Quaternion.Euler(0, 0, 90);
             UpdateBodyRotation();
 
@@ -198,6 +213,7 @@ public class Centipede : MonoBehaviour {
             avoidingShroom = true;
 
             if (currentDirection == 1) { currentDirection = 2; } else { currentDirection = 1; }
+            */
         }
 
         GetNextManeuver();
@@ -217,8 +233,6 @@ public class Centipede : MonoBehaviour {
 
     // Movement for body only
     void MoveAss() {
-        //transform.Translate(Vector3.left * Time.deltaTime * speed);
-        Debug.Log("have a target, get moving towards " + nextTurn);
         transform.position = Vector3.MoveTowards(transform.position, nextTurn, Time.deltaTime);
         if (transform.position == nextTurn) {
             Debug.Log("here");
@@ -228,11 +242,9 @@ public class Centipede : MonoBehaviour {
 
     void GetNextManeuver() {
         if (pieceToFollow.GetComponent<Centipede>().CheckNextMove(moveIndex)) {
-            Debug.Log("has a next move");
             nextTurn = pieceToFollow.GetComponent<Centipede>().rotateAtPosition[moveIndex];
             nextRotation = pieceToFollow.GetComponent<Centipede>().rotateTo[moveIndex];
         } else {
-            Debug.Log("no next move available - do something else");
             // Go to the heads direction instead
             nextTurn = pieceToFollow.GetComponent<Centipede>().transform.position;
             foreach (Transform child in pieceToFollow.transform) {
@@ -243,4 +255,14 @@ public class Centipede : MonoBehaviour {
         }
     }
 
+
+    // Get Laser'ed
+    void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.tag == "LaserBeam") {
+            Transform popSpot = transform;
+            Destroy(coll.gameObject);
+            Destroy(gameObject);
+            Instantiate(obstaclePrefab, popSpot.position, Quaternion.identity);
+        }
+    }
 }
