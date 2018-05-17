@@ -31,7 +31,7 @@ public class Centipede : MonoBehaviour {
 
     void Start() {
         // Figure out if its a head or a body and assign the right sprite
-        if (isHead == true) {
+        if (isHead) {
             GetComponent<SpriteRenderer>().sprite = sprites[0];
         } else {
             GetComponent<SpriteRenderer>().sprite = sprites[1];
@@ -40,7 +40,26 @@ public class Centipede : MonoBehaviour {
 
 
     void Update() {
-        
+        if (isHead) {
+            //MoveHead();
+        }
+    }
+
+
+    void MoveHead() {
+        /*if (movingDown == true) {
+            TurnAround();
+        }
+
+        if (movingDownTurn == true) {
+            if (transform.position.y <= downSpot.y) {
+                TurnBack();
+                movingDownTurn = false;
+                avoidingShroom = false;
+            }
+        }
+
+        Move();*/
     }
 
 }

@@ -7,6 +7,7 @@ public class SpawnCentipedes : MonoBehaviour {
     public GameObject[] spawnPoints;
     public GameObject centipedePrefab;
     public GameObject podPrefab;
+    public List<GameObject> centiPods;
 
     Transform spawnPodAt;
     Sprite spriteToUse;
@@ -20,6 +21,7 @@ public class SpawnCentipedes : MonoBehaviour {
         int numberOfPods = Random.Range(6, 15);
         bool firstPod = true;
         bool secondPod = false;
+        int podSpot = -1;
 
         spawnPodAt = spawnPoint.transform;
         for (int i = 0; i < numberOfPods; i++) {
@@ -38,10 +40,22 @@ public class SpawnCentipedes : MonoBehaviour {
                 // Just another brick in the wall
             }
 
+            // Parent it to the CentiPod (hahahah i kill me)
+            thisPod.transform.SetParent(centipede.transform);
+
             // Setup for the next pod spawn
             AdvanceSpawnPoint();
 
+            // Add this pod to the list
+            centiPods.Add(thisPod);
 
+            // Assign the piece to follow
+            if (podSpot >= 0) {
+                thisPod.GetComponent<Centipede>().pieceToFollow = centiPods[podSpot];
+            } 
+
+            // Increment the pod Counter
+            podSpot++;
         }
 
     }
