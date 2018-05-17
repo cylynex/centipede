@@ -4,6 +4,51 @@ using UnityEngine;
 
 public class SpawnCentipedes : MonoBehaviour {
 
-	public gameobject 
+    public GameObject[] spawnPoints;
+    public GameObject centipedePrefab;
+    public GameObject podPrefab;
 
+    Transform spawnPodAt;
+    Sprite spriteToUse;
+
+    void Start() {
+        int spawnToUse = Random.Range(0, spawnPoints.Length);
+        GameObject spawnPoint = spawnPoints[spawnToUse];
+        GameObject centipede = Instantiate(centipedePrefab, spawnPoint.transform.position, Quaternion.identity);
+
+        // Spawn some pods now inside that container
+        int numberOfPods = Random.Range(6, 15);
+        bool firstPod = true;
+        bool secondPod = false;
+
+        spawnPodAt = spawnPoint.transform;
+        for (int i = 0; i < numberOfPods; i++) {
+
+            // Create the Pod and assign sprite
+            GameObject thisPod = (GameObject)Instantiate(podPrefab, spawnPodAt.position, Quaternion.identity);
+            if (firstPod) {
+                thisPod.GetComponent<Centipede>().isHead = true;
+                firstPod = false;
+                secondPod = true;
+            } else if (secondPod) {
+                // First body segment
+                thisPod.GetComponent<Centipede>().firstBodyPart = true;
+                secondPod = false;
+            } else {
+                // Just another brick in the wall
+            }
+
+            // Setup for the next pod spawn
+            AdvanceSpawnPoint();
+
+
+        }
+
+    }
+
+
+    void AdvanceSpawnPoint() {
+        float spawnX = spawnPodAt.position.x + 0.3f;
+        spawnPodAt.position = new Vector3(spawnX, spawnPodAt.position.y, spawnPodAt.position.z);
+    }
 }
