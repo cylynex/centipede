@@ -8,6 +8,7 @@ TagManager:
   - LaserBeam
   - Centipede
   - followSpot
+  - CentiPod
   layers:
   - Default
   - TransparentFX

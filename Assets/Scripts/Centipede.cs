@@ -32,6 +32,7 @@ public class Centipede : MonoBehaviour {
     public List<Quaternion> rotateTo;
     public Vector3 nextTurn;
     public Quaternion nextRotation;
+    Vector3 amIstuck;
 
 
     void Start() {
@@ -64,6 +65,10 @@ public class Centipede : MonoBehaviour {
 
         if (movingDownTurn == true) {
             Debug.Log("movingdownturn");
+            if (transform.position == amIstuck) {
+                GetUnstuck();
+            }
+            amIstuck = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             if (transform.position.y <= downSpot.y) {
                 TurnBack();
                 movingDownTurn = false;
@@ -74,6 +79,27 @@ public class Centipede : MonoBehaviour {
 
         MoveFront();
 
+    }
+
+
+    // Get UnStuck
+    void GetUnstuck() {
+        movingDown = false;
+        int randDir = Random.Range(1, 2);
+        if (randDir == 1) {
+            currentDirection = 1;
+            z = 0;
+        } else {
+            currentDirection = 2;
+            z = 180;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, z);
+        UpdateBodyRotation();
+
+        movingDown = false;
+        avoidingShroom = false;
+        movingDownTurn = false;
     }
 
     /* Head Movement Specific Stuff */
@@ -108,7 +134,7 @@ public class Centipede : MonoBehaviour {
             UpdateBodyRotation();
 
             movingDown = false;
-        }
+        } 
     }
 
 
@@ -235,9 +261,6 @@ public class Centipede : MonoBehaviour {
     // Movement for body only
     void MoveAss() {
         transform.position = Vector3.MoveTowards(transform.position, nextTurn, speed * Time.deltaTime);
-        if (transform.position == nextTurn) {
-            Debug.Log("here");
-        }
     }
 
 
@@ -262,6 +285,7 @@ public class Centipede : MonoBehaviour {
     // Get Laser'ed
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.tag == "LaserBeam") {
+            GetComponent<AudioSource>().Play();
             Transform popSpot = transform;
             Destroy(coll.gameObject);
             Destroy(gameObject);

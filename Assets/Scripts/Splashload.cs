@@ -11,7 +11,7 @@ public class Splashload : MonoBehaviour {
 
 
     IEnumerator LoadGame() {
-        yield return new WaitForSeconds(18);
+        yield return new WaitForSeconds(24);
         SceneManager.LoadScene("Menu");
     }
 }

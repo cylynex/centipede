@@ -36,6 +36,7 @@ public class SpawnCentipedes : MonoBehaviour {
         int spawnToUse = Random.Range(0, spawnPoints.Length);
         GameObject spawnPoint = spawnPoints[spawnToUse];
         GameObject centipede = Instantiate(centipedePrefab, spawnPoint.transform.position, Quaternion.identity);
+        Vector3 spawnInitSpot = spawnPoint.transform.position;
 
         // Spawn some pods now inside that container
         int numberOfPods = Random.Range(6, 15);
@@ -80,6 +81,9 @@ public class SpawnCentipedes : MonoBehaviour {
 
             // Increment the pod Counter
             podSpot++;
+
+            // Reset the spawner which is moving for some reason
+            spawnPoint.transform.position = spawnInitSpot;
         }
 
         // Wipe out the centipede list for next spawn
