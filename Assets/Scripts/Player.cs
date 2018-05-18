@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
     static int highScore;
 
     void Start() {
-
+        PlayerPrefs.SetInt("yourscore", 0);
         highScore = PlayerPrefs.GetInt("highscore");
         highScoreBoard.text = highScore.ToString();
 
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour {
         if (points > highScore) {
             PlayerPrefs.SetInt("highscore",points);
         }
+        PlayerPrefs.SetInt("yourscore",points);
         highScoreBoard.text = points.ToString();
     }
 
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour {
             sounds[0].Play();
             Destroy(blowup, 3f);
             GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
             lives--;
             livesBoard.text = lives.ToString();
             if (lives > 0) {
@@ -106,6 +108,7 @@ public class Player : MonoBehaviour {
     IEnumerator Respawn() {
         yield return new WaitForSeconds(5);
         GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
         transform.position = new Vector3(0f, -4.4f, 0f);
     }
 	

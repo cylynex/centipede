@@ -60,6 +60,10 @@ public class Centipede : MonoBehaviour {
 
         if (movingDown == true) {
             Debug.Log("movingdown");
+            if (transform.position == amIstuck) {
+                GetUnstuck();
+            }
+            amIstuck = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             TurnAround();
         }
 
