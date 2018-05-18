@@ -1,11 +1,12 @@
 ﻿<Properties StartupConfiguration="{860A556A-600C-55DC-325C-32D71E43CC2B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Splashload.cs">
     <Files>
       <File FileName="Assets/Scripts/Walls.cs" Line="7" Column="48" />
-      <File FileName="Assets/Scripts/Player.cs" Line="22" Column="20" />
-      <File FileName="Assets/Scripts/Mushroom.cs" Line="12" Column="12" />
+      <File FileName="Assets/Scripts/Player.cs" Line="79" Column="59" />
+      <File FileName="Assets/Scripts/Mushroom.cs" Line="24" Column="65" />
       <File FileName="Assets/Scripts/SpawnCentipedes.cs" Line="65" Column="76" />
-      <File FileName="Assets/Scripts/Centipede.cs" Line="237" Column="88" />
+      <File FileName="Assets/Scripts/Centipede.cs" Line="148" Column="35" />
+      <File FileName="Assets/Scripts/Splashload.cs" Line="14" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

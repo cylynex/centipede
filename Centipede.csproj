@@ -339,6 +339,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\SpawnCentipedes.cs" />
     <Compile Include="Assets\Scripts\SpawnMushrooms.cs" />
+    <Compile Include="Assets\Scripts\Splashload.cs" />
     <Compile Include="Assets\Scripts\Walls.cs" />
   </ItemGroup>
   <ItemGroup>
