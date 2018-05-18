@@ -5,7 +5,6 @@ using UnityEngine;
 public class Walls : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll) {
-        Debug.Log("hit wall");
     }
 
 }

@@ -130,10 +130,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceToFollow: {fileID: 0}
   isHead: 0
-  speed: 1
+  speed: 2
   firstBodyPart: 0
   obstaclePrefab: {fileID: 1816249098899116, guid: 7388b7676d15c4a16863113ae4ce5477,
     type: 2}
+  pointValue: 10
   sprites:
   - {fileID: 21300000, guid: 7b89542073640493eb4aeb6efbc5fac7, type: 3}
   - {fileID: 21300002, guid: 7b89542073640493eb4aeb6efbc5fac7, type: 3}

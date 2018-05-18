@@ -7,9 +7,10 @@ public class Centipede : MonoBehaviour {
     [Header("Infrastructure")]
     public GameObject pieceToFollow;
     public bool isHead = false;
-    public float speed = 1;
+    public float speed = 2;
     public bool firstBodyPart = false;
     public GameObject obstaclePrefab;
+    public int pointValue = 10;
 
     public Sprite[] sprites;
 
@@ -233,7 +234,7 @@ public class Centipede : MonoBehaviour {
 
     // Movement for body only
     void MoveAss() {
-        transform.position = Vector3.MoveTowards(transform.position, nextTurn, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, nextTurn, speed * Time.deltaTime);
         if (transform.position == nextTurn) {
             Debug.Log("here");
         }
@@ -241,15 +242,17 @@ public class Centipede : MonoBehaviour {
 
 
     void GetNextManeuver() {
-        if (pieceToFollow.GetComponent<Centipede>().CheckNextMove(moveIndex)) {
-            nextTurn = pieceToFollow.GetComponent<Centipede>().rotateAtPosition[moveIndex];
-            nextRotation = pieceToFollow.GetComponent<Centipede>().rotateTo[moveIndex];
-        } else {
-            // Go to the heads direction instead
-            nextTurn = pieceToFollow.GetComponent<Centipede>().transform.position;
-            foreach (Transform child in pieceToFollow.transform) {
-                if (child.tag == "followSpot") {
-                    transform.position = child.position;
+        if (pieceToFollow != null) {
+            if (pieceToFollow.GetComponent<Centipede>().CheckNextMove(moveIndex)) {
+                nextTurn = pieceToFollow.GetComponent<Centipede>().rotateAtPosition[moveIndex];
+                nextRotation = pieceToFollow.GetComponent<Centipede>().rotateTo[moveIndex];
+            } else {
+                // Go to the heads direction instead
+                nextTurn = pieceToFollow.GetComponent<Centipede>().transform.position;
+                foreach (Transform child in pieceToFollow.transform) {
+                    if (child.tag == "followSpot") {
+                        transform.position = child.position;
+                    }
                 }
             }
         }
@@ -263,6 +266,8 @@ public class Centipede : MonoBehaviour {
             Destroy(coll.gameObject);
             Destroy(gameObject);
             Instantiate(obstaclePrefab, popSpot.position, Quaternion.identity);
+            Player.points += pointValue;
         }
     }
+
 }

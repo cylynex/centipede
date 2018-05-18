@@ -9,7 +9,7 @@ public class Mushroom : MonoBehaviour {
     public Sprite damage2;
     public ParticleSystem explode;
 
-    void TriggerEnter2D(Collider2D coll) {
+    void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag == "LaserBeam") {
             Destroy(coll.gameObject);
             hitPoints--;

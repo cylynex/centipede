@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+
+    public static int points = 0;
+
+    public Text scoreBoard;
+    public Text livesBoard;
 
     Vector3 mousePos;
     int offset = 8;
@@ -10,9 +16,12 @@ public class Player : MonoBehaviour {
     float fireCountdown;
     public GameObject firePoint;
     public GameObject laser;
-    float thrust = 150;
+    public float thrust = .1f;
+    public int lives = 3;
 
     void Start() {
+        points = 0;
+
         fireCountdown = 0;
     }
 
@@ -22,6 +31,7 @@ public class Player : MonoBehaviour {
 
         CheckForShoot();
 
+        UpdateScore();
     }
 
 
@@ -43,6 +53,11 @@ public class Player : MonoBehaviour {
                 fireCountdown = maxFireCountdown;
             }
         }
+    }
+
+
+    void UpdateScore() {
+        scoreBoard.text = points.ToString();
     }
 	
 }
