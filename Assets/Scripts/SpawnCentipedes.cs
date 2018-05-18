@@ -8,11 +8,31 @@ public class SpawnCentipedes : MonoBehaviour {
     public GameObject centipedePrefab;
     public GameObject podPrefab;
     public List<GameObject> centiPods;
+    public float timeBetweenSpawns = 15f;
+    public float spawnTimer = 0;
+    public float speedMod = 0.2f;
+    public float baseSpeed = 0.8f;
 
     Transform spawnPodAt;
     Sprite spriteToUse;
 
     void Start() {
+
+        SpawnCentipede();
+        spawnTimer = timeBetweenSpawns;
+    }
+
+    void Update() {
+        if (spawnTimer <= 0) {
+            SpawnCentipede();
+            spawnTimer = timeBetweenSpawns;
+        } else {
+            spawnTimer -= Time.deltaTime;
+        }
+    }
+
+
+    void SpawnCentipede() {
         int spawnToUse = Random.Range(0, spawnPoints.Length);
         GameObject spawnPoint = spawnPoints[spawnToUse];
         GameObject centipede = Instantiate(centipedePrefab, spawnPoint.transform.position, Quaternion.identity);
@@ -41,6 +61,9 @@ public class SpawnCentipedes : MonoBehaviour {
                 // Just another brick in the wall
             }
 
+            // Set the speed Mod
+            thisPod.GetComponent<Centipede>().speed = baseSpeed + speedMod;
+
             // Parent it to the CentiPod (hahahah i kill me)
             thisPod.transform.SetParent(centipede.transform);
 
@@ -53,14 +76,16 @@ public class SpawnCentipedes : MonoBehaviour {
             // Assign the piece to follow
             if (podSpot >= 0) {
                 thisPod.GetComponent<Centipede>().pieceToFollow = centiPods[podSpot];
-            } 
+            }
 
             // Increment the pod Counter
             podSpot++;
         }
 
+        // Wipe out the centipede list for next spawn
+        centiPods.Clear();
+        speedMod += 0.2f;
     }
-
 
     void AdvanceSpawnPoint() {
         float spawnX = spawnPodAt.position.x + 0.3f;

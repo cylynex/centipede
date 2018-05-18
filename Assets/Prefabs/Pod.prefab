@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceToFollow: {fileID: 0}
   isHead: 0
-  speed: 2
+  speed: 1
   firstBodyPart: 0
   obstaclePrefab: {fileID: 1816249098899116, guid: 7388b7676d15c4a16863113ae4ce5477,
     type: 2}

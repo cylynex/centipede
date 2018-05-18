@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour {
 
     public Text scoreBoard;
     public Text livesBoard;
+    public Text highScoreBoard;
 
     Vector3 mousePos;
     int offset = 8;
@@ -18,11 +20,17 @@ public class Player : MonoBehaviour {
     public GameObject laser;
     public float thrust = .1f;
     public int lives = 3;
+    static int highScore;
 
     void Start() {
-        points = 0;
 
+        highScore = PlayerPrefs.GetInt("highscore");
+        highScoreBoard.text = highScore.ToString();
+
+        points = 0;
         fireCountdown = 0;
+        lives = 3;
+        livesBoard.text = lives.ToString();
     }
 
     void Update() {
@@ -58,6 +66,36 @@ public class Player : MonoBehaviour {
 
     void UpdateScore() {
         scoreBoard.text = points.ToString();
+        if (points > highScore) {
+            PlayerPrefs.SetInt("highscore",points);
+        }
+        highScoreBoard.text = points.ToString();
+    }
+
+
+    void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.gameObject.tag == "Obstacle") {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponentInChildren<ParticleSystem>().Play();
+            lives--;
+            livesBoard.text = lives.ToString();
+            if (lives > 0) {
+                StartCoroutine("Respawn");
+            } else {
+                SceneManager.LoadScene("Lose");
+            }
+        } else {
+            Debug.Log("nottaggedright");
+        }
+    }
+
+
+    IEnumerator Respawn() {
+        yield return new WaitForSeconds(5);
+        transform.position = new Vector3(0f, -4.4f, 0f);
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 	
 }
