@@ -335,6 +335,7 @@
     <Compile Include="Assets\Scripts\Centipede.cs" />
     <Compile Include="Assets\Scripts\CentipedeController.cs" />
     <Compile Include="Assets\Scripts\CentipedeControllerNew.cs" />
+    <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\Mushroom.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\SpawnCentipedes.cs" />
